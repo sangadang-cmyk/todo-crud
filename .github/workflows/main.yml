@@ -53,6 +53,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
+          chmod x+a ./mvnw
           ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=$IMAGE_TAG -f pom.xml
           docker images
 #          docker tag $IMAGE_TAG
