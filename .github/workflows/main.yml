@@ -13,11 +13,9 @@ jobs:
     environment: production
 
     steps:
-      #      Download the code
       - name: Checkout
         uses: actions/checkout@v5
 
-      # Setup java
       - name: Set up JDK 25
         uses: actions/setup-java@v4
         with:
@@ -50,3 +48,19 @@ jobs:
           echo "::endgroup::"
           docker push $FULL_IMAGE_NAME
           echo "image=$FULL_IMAGE_NAME" >> $GITHUB_OUTPUT
+
+      - name: Fill in the new image ID in the AWS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
+        with:
+          task-definition: task-definition.json
+          container-name: Main
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy AWS ECS with task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: todo-crud-57f3
+          cluster: default-serverless
+          wait-for-service-stability: true

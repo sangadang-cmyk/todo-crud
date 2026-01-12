@@ -1,0 +1,91 @@
+{
+  "family": "default-serverless-todo-crud-57f3",
+  "containerDefinitions": [
+    {
+      "name": "Main",
+      "image": "315326805283.dkr.ecr.ap-southeast-1.amazonaws.com/sang_dang/todo-crud@sha256:c7ddcab84fee9c996d3605c1e9ad0ef3ecb6a0cfb61de032479c94d39304d28e",
+      "cpu": 512,
+      "memoryReservation": 1024,
+      "portMappings": [
+        {
+          "name": "main-8080-tcp",
+          "containerPort": 8080,
+          "hostPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/aws/ecs/default-serverless/todo-crud-57f3-ebb5",
+          "awslogs-region": "ap-southeast-1",
+          "awslogs-stream-prefix": "ecs"
+        },
+        "secretOptions": []
+      },
+      "systemControls": []
+    }
+  ],
+  "taskRoleArn": "arn:aws:iam::315326805283:role/TodoCrud-TaskRole",
+  "executionRoleArn": "arn:aws:iam::315326805283:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+    {
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    },
+    {
+      "name": "ecs.capability.task-eni"
+    }
+  ],
+  "placementConstraints": [],
+  "compatibilities": [
+    "EC2",
+    "MANAGED_INSTANCES",
+    "FARGATE"
+  ],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "512",
+  "memory": "1024",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "registeredAt": "2026-01-12T09:02:28.996Z",
+  "registeredBy": "arn:aws:iam::315326805283:user/sang_dang",
+  "enableFaultInjection": false,
+  "tags": [
+    {
+      "key": "project",
+      "value": "todocrud"
+    }
+  ]
+}
