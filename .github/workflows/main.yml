@@ -56,9 +56,9 @@ jobs:
           chmod +x ./mvnw
           echo "::group::Maven Build & Dockerize"
           ./mvnw spring-boot:build-image \
-            -ntp
+            -ntp \
+            -Dspring-boot.build-image.imageName=${{ vars.ECR_REPOSITORY }}
           echo "::endgroup::"
-          docker tag library/todo-crud:0.0.1-SNAPSHOT ${{ vars.ECR_REPOSITORY }}
           docker push ${{ vars.ECR_REPOSITORY }}
 
 #      - name: Fill in the new image ID in the Amazon ECS task definition
