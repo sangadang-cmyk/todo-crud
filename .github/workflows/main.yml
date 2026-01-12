@@ -49,6 +49,3 @@ jobs:
             -Dspring-boot.build-image.imageName=$FULL_IMAGE_NAME
           echo "::endgroup::"
           docker push $FULL_IMAGE_NAME
-
-#         Allow the next step to grab the full image name
-          echo "image=$FULL_IMAGE_NAME" >> $GITHUB_OUTPUT
